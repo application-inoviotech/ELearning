@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-agora/android/build.gradle b/node_modules/react-native-agora/android/build.gradle
+index 9bd946d..d3e73f2 100644
+--- a/node_modules/react-native-agora/android/build.gradle
++++ b/node_modules/react-native-agora/android/build.gradle
+@@ -49,7 +49,7 @@ repositories {
+         url("$rootDir/../node_modules/react-native/android")
+     }
+     google()
+-    jcenter()
++    mavenCentral()
+ }
+ 
+ dependencies {
