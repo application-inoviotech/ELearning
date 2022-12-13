@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icons from '../assets/Icons';
+import Images from '../assets/Images';
 import {Colors} from '../config';
 const {width} = Dimensions.get('window');
 
@@ -76,9 +77,9 @@ export default function CustomTextInput(props) {
             style={{
               width: '85%',
               height: 50,
-              color: Colors.secondary,
+              color: Colors.black,
             }}
-            placeholderTextColor={Colors.secondary}
+            placeholderTextColor={Colors.black}
             secureTextEntry={secureTextEntry}
             {...props}
           />
@@ -105,6 +106,10 @@ export default function CustomTextInput(props) {
           )}
         </View>
       )}
+      <Image
+        source={Images.border}
+        style={{width: width, marginLeft: -30, marginTop: showInput ? 0 : 50}}
+      />
     </View>
   );
 }

@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 // Navigation here
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 
-import { NavService } from './config';
-import { ImageBackground } from 'react-native';
-import { connect } from 'react-redux';
-import Images from './assets/Images';
+import {Colors, NavService} from './config';
+import {connect} from 'react-redux';
 
 //Screens
-import { OnBoarding, LoginSignup } from './containers';
+import {
+  OnBoarding,
+  LoginSignup,
+  ForgotPassword,
+  Verification,
+  ResetPassword,
+} from './containers';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,13 +22,16 @@ const AuthStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        contentStyle: { backgroundColor: 'transparent' },
-        animation: 'simple_push',
+        contentStyle: {backgroundColor: Colors.white},
+        animation: 'fade',
         headerShown: false,
       }}
       initialRouteName="OnBoarding">
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
       <Stack.Screen name="LoginSignup" component={LoginSignup} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen name="Verification" component={Verification} />
+      <Stack.Screen name="ResetPassword" component={ResetPassword} />
     </Stack.Navigator>
   );
 };
@@ -37,23 +44,23 @@ class Navigation extends Component {
   };
   componentDidMount() {
     setTimeout(() => {
-      const { userData } = this.props;
+      const {userData} = this.props;
       if (userData) {
-        this.setState({ initialRouteName: 'AppStack' });
+        this.setState({initialRouteName: 'AppStack'});
       }
-      this.setState({ ready: true });
+      this.setState({ready: true});
     }, 2000);
   }
   render() {
-    const { initialRouteName, ready } = this.state;
+    const {initialRouteName, ready} = this.state;
     if (!ready) return null;
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
-        screenOptions={{ animation: 'simple_push' }}>
+        screenOptions={{animation: 'simple_push'}}>
         <Stack.Navigator
           screenOptions={{
-            contentStyle: { backgroundColor: 'transparent' },
+            contentStyle: {backgroundColor: 'transparent'},
             animation: 'simple_push',
             headerShown: false,
           }}
@@ -65,7 +72,7 @@ class Navigation extends Component {
   }
 }
 
-function mapStateToProps({ user: { userData } }) {
+function mapStateToProps({user: {userData}}) {
   return {
     userData,
   };

@@ -1,16 +1,24 @@
 import {
   LayoutAnimation,
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
+  UIManager,
+  Platform,
 } from 'react-native';
 import React, {Component} from 'react';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 import Logo from '../../components/Logo';
 import CustomTextInput from '../../components/CustomTextInput';
 import CustomButton from '../../components/CustomButton';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export class LoginSignup extends Component {
   state = {
@@ -25,7 +33,9 @@ export class LoginSignup extends Component {
     const {index, username, email, phone, password, confirmPassword} =
       this.state;
     return (
-      <ScrollView
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        bounces={false}
         keyboardShouldPersistTaps="handled"
         style={{flex: 1, backgroundColor: Colors.white}}
         contentContainerStyle={{
@@ -40,7 +50,7 @@ export class LoginSignup extends Component {
         <View
           style={{
             flex: 1,
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.secondary,
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             marginTop: 15,
@@ -53,7 +63,7 @@ export class LoginSignup extends Component {
             }}>
             <TouchableOpacity
               onPress={() => {
-                LayoutAnimation.linear();
+                LayoutAnimation.easeInEaseOut();
                 this.setState({
                   index: 0,
                   username: '',
@@ -75,7 +85,7 @@ export class LoginSignup extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                LayoutAnimation.linear();
+                LayoutAnimation.easeInEaseOut();
                 this.setState({
                   index: 1,
                   username: '',
@@ -138,6 +148,7 @@ export class LoginSignup extends Component {
             )}
             {index == 0 && (
               <TouchableOpacity
+                onPress={() => NavService.navigate('ForgotPassword')}
                 style={{
                   marginLeft: 40,
                   marginTop: 20,
@@ -147,7 +158,7 @@ export class LoginSignup extends Component {
                   style={{
                     fontSize: 16,
                     fontWeight: '500',
-                    color: Colors.cyan,
+                    color: Colors.primary,
                   }}>
                   Forgot Password?
                 </Text>
@@ -155,24 +166,25 @@ export class LoginSignup extends Component {
             )}
             <View
               style={{
-                marginTop: 30,
+                marginTop: 50,
               }}>
-              <CustomButton
-                title={index == 0 ? 'Login' : 'Sign Up'}
-                buttonStyle={{marginBottom: 20}}
-              />
+              <CustomButton title={index == 0 ? 'Login' : 'Sign Up'} />
             </View>
             {index == 0 && (
               <TouchableOpacity
+                onPress={() => {
+                  LayoutAnimation.easeInEaseOut();
+                  this.setState({index: 1});
+                }}
                 style={{
-                  marginBottom: 20,
+                  marginVertical: 20,
                   alignSelf: 'center',
                 }}>
                 <Text
                   style={{
                     fontSize: 16,
                     fontWeight: '500',
-                    color: Colors.cyan,
+                    color: Colors.primary,
                   }}>
                   Create Account
                 </Text>
@@ -180,7 +192,7 @@ export class LoginSignup extends Component {
             )}
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
