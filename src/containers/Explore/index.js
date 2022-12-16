@@ -1,7 +1,7 @@
 import {Text, View} from 'react-native';
 import React, {Component} from 'react';
 
-export class Profile extends Component {
+export class Explore extends Component {
   render() {
     return (
       <View
@@ -16,11 +16,11 @@ export class Profile extends Component {
             fontWeight: 'bold',
             color: 'teal',
           }}>
-          Profile
+          Explore
         </Text>
       </View>
     );
   }
 }
 
-export default Profile;
+export default Explore;

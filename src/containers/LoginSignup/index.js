@@ -168,7 +168,12 @@ export class LoginSignup extends Component {
               style={{
                 marginTop: 50,
               }}>
-              <CustomButton title={index == 0 ? 'Login' : 'Sign Up'} />
+              <CustomButton
+                title={index == 0 ? 'Login' : 'Sign Up'}
+                onPress={() => {
+                  NavService.reset(0, [{name: 'AppStack'}]);
+                }}
+              />
             </View>
             {index == 0 && (
               <TouchableOpacity

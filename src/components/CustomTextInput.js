@@ -8,7 +8,6 @@ import {
   LayoutAnimation,
   TouchableOpacity,
 } from 'react-native';
-import Icons from '../assets/Icons';
 import Images from '../assets/Images';
 import {Colors} from '../config';
 const {width} = Dimensions.get('window');
@@ -110,29 +109,6 @@ export default function CustomTextInput(props) {
         source={Images.border}
         style={{width: width, marginLeft: -30, marginTop: showInput ? 0 : 50}}
       />
-    </View>
-  );
-}
-
-export function ProfileTextInput(props) {
-  const {placeholder} = props;
-  return (
-    <View style={{width: '100%', marginTop: 40}}>
-      <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-        {placeholder}
-      </Text>
-      <View
-        style={{
-          width: '100%',
-          borderBottomWidth: 1,
-          borderBottomColor: '#858595',
-        }}>
-        <TextInput
-          style={{width: '100%', height: 50, color: 'black'}}
-          placeholderTextColor={'#7E7E7E'}
-          {...props}
-        />
-      </View>
     </View>
   );
 }

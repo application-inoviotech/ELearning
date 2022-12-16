@@ -1,103 +1,152 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import Device from './config/Helpers/Devices';
-import {Colors, Icon} from './config';
-import Icons from './assets/Icons';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions,
+} from 'react-native';
+import Colors from '../Colors';
+import Icons from '../../assets/Icons';
+import Images from '../../assets/Images';
+
+const {width} = Dimensions.get('window');
 
 export default class TabbarComp extends React.Component {
   render() {
-    const {state, descriptors, navigation} = this.props;
+    const {state, navigation} = this.props;
     return (
       <View
         style={{
-          padding: 20,
-          paddingTop: 0,
-          backgroundColor: Colors.background,
+          height: width / 5.91,
         }}>
         <View
           style={{
-            backgroundColor: Colors.primary,
-            flexDirection: 'row',
-            overflow: 'hidden',
-            borderRadius: 5,
+            backgroundColor: 'transparent',
+            position: 'absolute',
+            bottom: 0,
           }}>
-          {state.routes.map((route, index) => {
-            const isFocused = state.index === index;
-            const onPress = () => {
-              if (route.name === 'Chat') {
-                navigation.navigate('Chat', {screen: 'Chat'});
-              } else {
-                navigation.navigate(route.name);
-              }
-            };
-            let imageSrc = Icons.home;
-            if (route.name === 'Lesson') imageSrc = Icons.lesson;
-            if (route.name === 'Connections') imageSrc = Icons.connections;
-            if (route.name === 'Quizzes') imageSrc = Icons.quizzes;
-            if (route.name === 'Profile') imageSrc = Icons.profile;
-            return (
-              <TouchableOpacity
-                key={index}
-                accessibilityState={isFocused ? {selected: true} : {}}
-                accessibilityRole="button"
-                activeOpacity={0.8}
-                onPress={onPress}
-                style={styles.tabs}>
-                <View
-                  style={{
-                    backgroundColor: isFocused ? Colors.white : 'transparent',
-                    height: 45,
-                    width: 45,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 10,
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: isFocused ? 5 : 0,
-                  }}>
-                  <Image
-                    source={imageSrc}
+          <ImageBackground
+            source={Images.bottomTab}
+            imageStyle={{
+              width,
+              height: width / 3.72,
+              resizeMode: 'cover',
+            }}
+            style={{
+              flexDirection: 'row',
+              width,
+              height: width / 3.72,
+              backgroundColor: 'transparent',
+            }}>
+            {state.routes.map((route, index) => {
+              const onPress = () => {
+                if (route.name === 'Chat') {
+                  navigation.navigate('Chat', {screen: 'Chat'});
+                } else {
+                  navigation.navigate(route.name);
+                }
+              };
+              let imageSrc = Icons.home;
+              if (route.name === 'MyCourses') imageSrc = Icons.myCourses;
+              if (route.name === 'Explore') imageSrc = Icons.explore;
+              if (route.name === 'MyChat') imageSrc = Icons.chat;
+              if (route.name === 'Profile') imageSrc = Icons.profile;
+
+              let title = 'Home';
+              if (route.name === 'MyCourses') title = 'My Courses';
+              if (route.name === 'Explore') title = 'Explore';
+              if (route.name === 'MyChat') title = 'My Chat';
+              if (route.name === 'Profile') title = 'Profile';
+
+              if (route.name === 'Explore') {
+                return (
+                  <View
+                    key={index}
                     style={{
-                      height: 25,
-                      width: 25,
-                      tintColor: isFocused ? Colors.primary : Colors.white,
-                    }}
-                    resizeMode="contain"
-                  />
-                </View>
-                {/* {isFocused ? (
+                      flex: 1,
+                      alignItems: 'center',
+                    }}>
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={onPress}
+                      style={{
+                        backgroundColor: Colors.primary,
+                        height: width / 6.9,
+                        width: width / 6.9,
+                        borderRadius: width,
+                        marginTop: 5,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        source={imageSrc}
+                        style={{
+                          height: 25,
+                          width: 25,
+                        }}
+                        resizeMode="contain"
+                      />
+                    </TouchableOpacity>
+                    <Text
+                      style={{
+                        marginTop: 12,
+                        color: Colors.darkText,
+                        fontSize: 11,
+                        fontWeight: '600',
+                        position: 'absolute',
+                        bottom: 15,
+                      }}>
+                      {title}
+                    </Text>
+                  </View>
+                );
+              }
+              return (
                 <View
                   style={{
-                    width: 16,
-                    height: 16,
-                    borderRadius: 16,
-                    // borderBottomRightRadius: 16,
-                    // borderBottomEndRadius: 16,
-                    backgroundColor: '#F1668D',
-                    position: 'absolute',
-                    top: -8,
-                  }}
-                />
-              ) : null} */}
-              </TouchableOpacity>
-            );
-          })}
+                    flex: 1,
+                    justifyContent: 'flex-end',
+                  }}>
+                  <TouchableOpacity
+                    key={index}
+                    activeOpacity={0.8}
+                    onPress={onPress}
+                    style={{
+                      flex: 1,
+                      height: width / 5.91,
+                      paddingVertical: 15,
+                      justifyContent: 'flex-end',
+                      alignItems: 'center',
+                      overflow: 'hidden',
+                    }}>
+                    <Image
+                      source={imageSrc}
+                      style={{
+                        height: 25,
+                        width: 25,
+                        marginTop: 30,
+                        tintColor: Colors.darkText,
+                      }}
+                      resizeMode="contain"
+                    />
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        color: Colors.darkText,
+                        fontSize: 11,
+                        fontWeight: '600',
+                      }}>
+                      {title}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            })}
+          </ImageBackground>
         </View>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  tabs: {
-    flex: 1,
-    paddingVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-});
