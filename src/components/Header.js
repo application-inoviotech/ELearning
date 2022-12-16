@@ -7,6 +7,7 @@ import {Colors, NavService} from '../config';
 export function Header({
   title,
   back = false,
+  menu = true,
   nav = '',
   notification = false,
   rightIcon = Icons.notification,
@@ -32,20 +33,22 @@ export function Header({
         marginBottom: 10,
         paddingHorizontal: 20,
       }}>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => onPress()}
-        style={{position: 'absolute', left: 20}}>
-        <Image
-          source={back ? Icons.back : Icons.menu}
-          style={{
-            width: 25,
-            height: 25,
-            resizeMode: 'contain',
-            tintColor: back ? Colors.black : Colors.primary,
-          }}
-        />
-      </TouchableOpacity>
+      {menu && (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => onPress()}
+          style={{position: 'absolute', left: 20}}>
+          <Image
+            source={back ? Icons.back : Icons.menu}
+            style={{
+              width: 25,
+              height: 25,
+              resizeMode: 'contain',
+              tintColor: back ? Colors.black : Colors.primary,
+            }}
+          />
+        </TouchableOpacity>
+      )}
 
       <View style={{}}>
         <Text
