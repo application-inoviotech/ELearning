@@ -22,6 +22,7 @@ import {
   Explore,
   Messages,
   Profile,
+  Chat,
 } from './containers';
 
 const Stack = createNativeStackNavigator();
@@ -93,6 +94,7 @@ const AppStack = () => {
       }}
       initialRouteName="TabStack">
       <Stack.Screen name="TabStack" component={TabStack} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 };

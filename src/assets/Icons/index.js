@@ -9,4 +9,9 @@ export default Icons = {
   search: require('./search.png'),
   star: require('./star.png'),
   back: require('./back.png'),
+  video: require('./video.png'),
+  phone: require('./phone.png'),
+  plus: require('./plus.png'),
+  addChat: require('./addChat.png'),
+  send: require('./send.png'),
 };

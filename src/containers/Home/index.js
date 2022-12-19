@@ -241,12 +241,12 @@ export class Home extends Component {
             />
           </View>
           <FlatList
-            key={selectedCourse}
             data={category}
             renderItem={this.renderItem}
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{marginTop: 15}}
+            keyExtractor={item => item.id}
           />
         </View>
         <Text
@@ -261,6 +261,7 @@ export class Home extends Component {
         </Text>
         <FlatList
           data={ongoingCourses}
+          keyExtractor={item => item.id}
           renderItem={props => <OngoingCourses {...props} />}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -282,6 +283,7 @@ export class Home extends Component {
         </Text>
         <FlatList
           data={featuredCourses}
+          keyExtractor={item => item.id}
           renderItem={props => <Courses {...props} />}
           horizontal
           showsHorizontalScrollIndicator={false}

@@ -11,6 +11,7 @@ import MyCourses from './MyCourses';
 import Explore from './Explore';
 import Messages from './Messages';
 import Profile from './Profile';
+import Chat from './Chat';
 
 export {
   OnBoarding,
@@ -23,4 +24,5 @@ export {
   Explore,
   Messages,
   Profile,
+  Chat,
 };

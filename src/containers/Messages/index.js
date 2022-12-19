@@ -1,7 +1,14 @@
-import {Image, Text, View, FlatList, TextInput} from 'react-native';
+import {
+  Image,
+  Text,
+  View,
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React, {Component} from 'react';
 import Header from '../../components/Header';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 import Icons from '../../assets/Icons';
 
 const messages = [
@@ -127,7 +134,9 @@ export default MyCourses;
 
 const Course = ({item}) => {
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => NavService.navigate('Chat', {item})}
       style={{
         flexDirection: 'row',
         width: '100%',
@@ -233,6 +242,6 @@ const Course = ({item}) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
