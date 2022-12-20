@@ -20,6 +20,7 @@ LogBox.ignoreLogs(['Remote debugger']);
 class App extends Component {
   componentDidMount() {
     Orientation.lockToPortrait();
+    console.clear();
   }
   render() {
     return (
