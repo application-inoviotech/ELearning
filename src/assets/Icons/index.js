@@ -16,4 +16,6 @@ export default Icons = {
   addChat: require('./addChat.png'),
   send: require('./send.png'),
   play: require('./play.png'),
+  check: require('./check.png'),
+  cross: require('./cross.png'),
 };
