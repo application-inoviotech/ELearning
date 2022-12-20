@@ -6,6 +6,7 @@ const Colors = {
   green: '#2DC13B',
   grey: '#A8A8A8',
   yellow: '#FABF0A',
+  pink: '#FF6363',
   background: '#F5F5FC',
   primary: '#376AED',
   primaryDark: '#343674',
@@ -14,6 +15,5 @@ const Colors = {
   darkText: '#868686',
   title: '#414141',
   border: '#EBEDEF',
-  icon: '#AA1B21',
 };
 export default Colors;

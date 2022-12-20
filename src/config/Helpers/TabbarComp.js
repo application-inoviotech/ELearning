@@ -105,12 +105,12 @@ export default class TabbarComp extends React.Component {
               }
               return (
                 <View
+                  key={index}
                   style={{
                     flex: 1,
                     justifyContent: 'flex-end',
                   }}>
                   <TouchableOpacity
-                    key={index}
                     activeOpacity={0.8}
                     onPress={onPress}
                     style={{

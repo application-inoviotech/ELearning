@@ -1,10 +1,12 @@
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {Colors} from '../config';
+import {Colors, NavService} from '../config';
 
 export default Courses = ({item, index}) => {
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => NavService.navigate('CourseDetails')}
       style={{
         width: 200,
         backgroundColor: Colors.white,
@@ -96,6 +98,6 @@ export default Courses = ({item, index}) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

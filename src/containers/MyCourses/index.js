@@ -1,7 +1,7 @@
 import {Image, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {Component} from 'react';
 import Header from '../../components/Header';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 import Icons from '../../assets/Icons';
 
 const courses = [
@@ -65,7 +65,7 @@ export class MyCourses extends Component {
               flex: 1,
             }}
             contentContainerStyle={{paddingBottom: 30, flexGrow: 1}}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -126,6 +126,8 @@ const Course = ({item}) => {
           <Image source={Icons.star} style={{width: 15, height: 15}} />
         </View>
         <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => NavService.navigate('EnrolledCourseDetails')}
           style={{
             backgroundColor: Colors.primary,
             alignSelf: 'flex-end',

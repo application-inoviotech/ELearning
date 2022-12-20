@@ -12,6 +12,9 @@ import Explore from './Explore';
 import Messages from './Messages';
 import Profile from './Profile';
 import Chat from './Chat';
+import CourseDetails from './CourseDetails';
+import EnrolledCourseDetails from './EnrolledCourseDetails';
+import Quiz from './Quiz';
 
 export {
   OnBoarding,
@@ -25,4 +28,7 @@ export {
   Messages,
   Profile,
   Chat,
+  CourseDetails,
+  EnrolledCourseDetails,
+  Quiz,
 };

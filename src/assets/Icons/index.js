@@ -8,10 +8,12 @@ export default Icons = {
   profile: require('./profile.png'),
   search: require('./search.png'),
   star: require('./star.png'),
+  starEmpty: require('./starEmpty.png'),
   back: require('./back.png'),
   video: require('./video.png'),
   phone: require('./phone.png'),
   plus: require('./plus.png'),
   addChat: require('./addChat.png'),
   send: require('./send.png'),
+  play: require('./play.png'),
 };

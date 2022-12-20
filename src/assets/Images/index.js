@@ -9,4 +9,11 @@ export default Images = {
   programming: require('./programming.png'),
   UIUX: require('./UIUX.png'),
   bottomTab: require('./bottomTab.png'),
+  coursePlaceholder: require('./coursePlaceholder.png'),
+  avatar: require('./avatar.png'),
+  book: require('./book.png'),
+  clock: require('./clock.png'),
+  clockDuration: require('./clockDuration.png'),
+  chart: require('./chart.png'),
+  calendar: require('./calendar.png'),
 };

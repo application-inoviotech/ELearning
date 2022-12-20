@@ -43,13 +43,13 @@ const ongoingCourses = [
     lessonsCompleted: 0,
   },
   {
-    id: 1,
+    id: 3,
     title: '3D Essential - CenemaD',
     totalLessons: 32,
     lessonsCompleted: 10,
   },
   {
-    id: 2,
+    id: 4,
     title: 'Marketing',
     totalLessons: 32,
     lessonsCompleted: 31,
@@ -246,7 +246,7 @@ export class Home extends Component {
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{marginTop: 15}}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
         <Text
@@ -261,7 +261,7 @@ export class Home extends Component {
         </Text>
         <FlatList
           data={ongoingCourses}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={props => <OngoingCourses {...props} />}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -283,7 +283,7 @@ export class Home extends Component {
         </Text>
         <FlatList
           data={featuredCourses}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={props => <Courses {...props} />}
           horizontal
           showsHorizontalScrollIndicator={false}

@@ -9,9 +9,10 @@ export function Header({
   back = false,
   menu = true,
   nav = '',
-  notification = false,
+  showRightIcon = false,
   rightIcon = Icons.notification,
-  rightIconNav = () => {
+  rightIconStyle = {},
+  onRightIconPress = () => {
     NavService.navigate('Notification');
   },
 }) {
@@ -60,10 +61,10 @@ export function Header({
           {title}
         </Text>
       </View>
-      {notification && (
+      {showRightIcon && (
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={rightIconNav}
+          onPress={onRightIconPress}
           style={{position: 'absolute', right: 20}}>
           <Image
             source={rightIcon}
@@ -71,7 +72,7 @@ export function Header({
               width: 25,
               height: 25,
               resizeMode: 'contain',
-              tintColor: Colors.primary,
+              ...rightIconStyle,
             }}
           />
         </TouchableOpacity>

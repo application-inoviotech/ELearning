@@ -121,7 +121,7 @@ export class MyCourses extends Component {
               flex: 1,
             }}
             contentContainerStyle={{paddingBottom: 30, flexGrow: 1}}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
           />
         </View>

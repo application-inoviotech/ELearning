@@ -23,6 +23,9 @@ import {
   Messages,
   Profile,
   Chat,
+  CourseDetails,
+  EnrolledCourseDetails,
+  Quiz,
 } from './containers';
 
 const Stack = createNativeStackNavigator();
@@ -47,39 +50,38 @@ const AuthStack = () => {
   );
 };
 
+const MyCoursesStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: {backgroundColor: Colors.white},
+        animation: 'fade',
+        headerShown: false,
+      }}
+      initialRouteName="MyCourses">
+      <Stack.Screen name="MyCourses" component={MyCourses} />
+      <Stack.Screen
+        name="EnrolledCourseDetails"
+        component={EnrolledCourseDetails}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const TabStack = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         animation: 'simple_push',
+        headerShown: false,
       }}
       tabBar={props => <TabbarComp {...props} />}
       initialRouteName={'HomeScreen'}>
-      <Tab.Screen
-        name="HomeScreen"
-        component={Home}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="MyCourses"
-        component={MyCourses}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="Explore"
-        component={Explore}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="MyChat"
-        component={Messages}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
+      <Tab.Screen name="HomeScreen" component={Home} />
+      <Tab.Screen name="MyCourses" component={MyCoursesStack} />
+      <Tab.Screen name="Explore" component={Explore} />
+      <Tab.Screen name="MyChat" component={Messages} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 };
@@ -95,6 +97,8 @@ const AppStack = () => {
       initialRouteName="TabStack">
       <Stack.Screen name="TabStack" component={TabStack} />
       <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="CourseDetails" component={CourseDetails} />
+      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   );
 };
