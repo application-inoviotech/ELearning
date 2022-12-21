@@ -82,7 +82,7 @@ const TabStack = () => {
       tabBar={props => <TabbarComp {...props} />}
       initialRouteName={'HomeScreen'}>
       <Tab.Screen name="HomeScreen" component={Home} />
-      <Tab.Screen name="MyCourses" component={MyCoursesStack} />
+      <Tab.Screen name="MyCoursesStack" component={MyCoursesStack} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="MyChat" component={Messages} />
       <Tab.Screen name="Profile" component={Profile} />

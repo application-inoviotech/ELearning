@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, View, Image} from 'react-native';
 import React, {Component} from 'react';
 import Header from '../../components/Header';
-import {Colors, Shadows} from '../../config';
+import {Colors, NavService, Shadows} from '../../config';
 import CustomButton from '../../components/CustomButton';
 import Toast from 'react-native-toast-message';
 
@@ -83,8 +83,10 @@ export class Quiz extends Component {
             }
             if (activeQuestion < questions.length - 1) {
               this.setState({activeQuestion: activeQuestion + 1});
-            } else {
+            } else if (!showResult) {
               this.setState({showResult: true, activeQuestion: 0});
+            } else {
+              NavService.navigate('Result');
             }
           }}
         />

@@ -21,4 +21,10 @@ export default Icons = {
   visa: require('./visa.png'),
   master: require('./master.png'),
   bank: require('./bank.png'),
+  emoji: require('./emoji.png'),
+  badge: require('./badge.png'),
+  user: require('./user.png'),
+  mail: require('./mail.png'),
+  lock: require('./lock.png'),
+  pin: require('./pin.png'),
 };

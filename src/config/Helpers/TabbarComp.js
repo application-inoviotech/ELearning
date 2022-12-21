@@ -49,13 +49,13 @@ export default class TabbarComp extends React.Component {
                 }
               };
               let imageSrc = Icons.home;
-              if (route.name === 'MyCourses') imageSrc = Icons.myCourses;
+              if (route.name === 'MyCoursesStack') imageSrc = Icons.myCourses;
               if (route.name === 'Explore') imageSrc = Icons.explore;
               if (route.name === 'MyChat') imageSrc = Icons.chat;
               if (route.name === 'Profile') imageSrc = Icons.profile;
 
               let title = 'Home';
-              if (route.name === 'MyCourses') title = 'My Courses';
+              if (route.name === 'MyCoursesStack') title = 'My Courses';
               if (route.name === 'Explore') title = 'Explore';
               if (route.name === 'MyChat') title = 'My Chat';
               if (route.name === 'Profile') title = 'Profile';
