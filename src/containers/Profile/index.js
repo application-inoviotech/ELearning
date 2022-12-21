@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 import Header from '../../components/Header';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 import ProfileImage from '../../components/ProfileImage';
 import Images from '../../assets/Images';
 import CustomTextInput from '../../components/CustomTextInput';
@@ -46,7 +46,9 @@ export class Profile extends Component {
           <Header back title="My Profile" />
           <TouchableOpacity
             onPress={() => {
-              Nav;
+              {
+                NavService.navigate('EditProfile');
+              }
             }}
             style={{
               bottom: -45,
@@ -163,10 +165,12 @@ export class Profile extends Component {
             }}>
             <Fields label={'Password'} icon={Icons.lock} value="********" />
             <Text
-              onPress={() => {}}
+              onPress={() => NavService.navigate('ChangePassword')}
               style={{
                 position: 'absolute',
                 right: 10,
+                color: Colors.primary,
+                fontSize: 12,
               }}>
               Change Password
             </Text>

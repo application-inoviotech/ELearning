@@ -30,6 +30,8 @@ import {
   AddCard,
   PaymentSuccess,
   Result,
+  EditProfile,
+  ChangePassword,
 } from './containers';
 
 const Stack = createNativeStackNavigator();
@@ -72,6 +74,22 @@ const MyCoursesStack = () => {
   );
 };
 
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: {backgroundColor: Colors.white},
+        animation: 'fade',
+        headerShown: false,
+      }}
+      initialRouteName="ProfileScreen">
+      <Stack.Screen name="ProfileScreen" component={Profile} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+    </Stack.Navigator>
+  );
+};
+
 const TabStack = () => {
   return (
     <Tab.Navigator
@@ -85,7 +103,7 @@ const TabStack = () => {
       <Tab.Screen name="MyCoursesStack" component={MyCoursesStack} />
       <Tab.Screen name="Explore" component={Explore} />
       <Tab.Screen name="MyChat" component={Messages} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

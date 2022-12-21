@@ -19,6 +19,8 @@ import Payment from './Payment';
 import AddCard from './AddCard';
 import PaymentSuccess from './PaymentSuccess';
 import Result from './Result';
+import EditProfile from './EditProfile';
+import ChangePassword from './ChangePassword';
 
 export {
   OnBoarding,
@@ -39,4 +41,6 @@ export {
   AddCard,
   PaymentSuccess,
   Result,
+  EditProfile,
+  ChangePassword,
 };
