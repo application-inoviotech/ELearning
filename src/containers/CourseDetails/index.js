@@ -14,7 +14,7 @@ import Header from '../../components/Header';
 import ProfileImage from '../../components/ProfileImage';
 import Icons from '../../assets/Icons';
 import Images from '../../assets/Images';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 
 const {width} = Dimensions.get('window');
 
@@ -249,6 +249,7 @@ export class CourseDetails extends Component {
           {selected == 'overview' ? <OverviewComp /> : <LessonsComp />}
         </ScrollView>
         <TouchableOpacity
+          onPress={() => NavService.navigate('Payment')}
           activeOpacity={0.8}
           style={{
             height: 60,

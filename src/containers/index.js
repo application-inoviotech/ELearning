@@ -15,6 +15,10 @@ import Chat from './Chat';
 import CourseDetails from './CourseDetails';
 import EnrolledCourseDetails from './EnrolledCourseDetails';
 import Quiz from './Quiz';
+import Payment from './Payment';
+import AddCard from './AddCard';
+import PaymentSuccess from './PaymentSuccess';
+import Result from './Result';
 
 export {
   OnBoarding,
@@ -31,4 +35,8 @@ export {
   CourseDetails,
   EnrolledCourseDetails,
   Quiz,
+  Payment,
+  AddCard,
+  PaymentSuccess,
+  Result,
 };

@@ -26,6 +26,10 @@ import {
   CourseDetails,
   EnrolledCourseDetails,
   Quiz,
+  Payment,
+  AddCard,
+  PaymentSuccess,
+  Result,
 } from './containers';
 
 const Stack = createNativeStackNavigator();
@@ -99,6 +103,10 @@ const AppStack = () => {
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="CourseDetails" component={CourseDetails} />
       <Stack.Screen name="Quiz" component={Quiz} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="AddCard" component={AddCard} />
+      <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} />
+      <Stack.Screen name="Result" component={Result} />
     </Stack.Navigator>
   );
 };

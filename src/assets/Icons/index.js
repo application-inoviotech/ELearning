@@ -18,4 +18,7 @@ export default Icons = {
   play: require('./play.png'),
   check: require('./check.png'),
   cross: require('./cross.png'),
+  visa: require('./visa.png'),
+  master: require('./master.png'),
+  bank: require('./bank.png'),
 };

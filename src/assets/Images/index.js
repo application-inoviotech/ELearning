@@ -16,4 +16,5 @@ export default Images = {
   clockDuration: require('./clockDuration.png'),
   chart: require('./chart.png'),
   calendar: require('./calendar.png'),
+  paymentSuccess: require('./paymentSuccess.png'),
 };
