@@ -111,6 +111,7 @@ export class Home extends Component {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }
+
   renderItem = ({item}) => {
     const {selectedCourse} = this.state;
     return (
@@ -139,190 +140,198 @@ export class Home extends Component {
   };
 
   render() {
-    const {selectedCourse, isKeyboardVisible} = this.state;
+    const {isKeyboardVisible} = this.state;
     return (
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        bounces={false}
+      <View
         style={{
           flex: 1,
-          backgroundColor: Colors.white,
-        }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: Colors.white,
-          paddingBottom: isKeyboardVisible ? 0 : 50,
+          backgroundColor: Colors.yellow,
+          paddingTop: getStatusBarHeight(),
         }}>
         <View
           style={{
-            backgroundColor: Colors.yellow,
-            width: '100%',
-            paddingTop: getStatusBarHeight(),
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 20,
             paddingBottom: 10,
+          }}>
+          <TouchableOpacity
+            onPress={NavService.toggleDrawer}
+            activeOpacity={0.8}
+            style={{
+              padding: 10,
+              backgroundColor: Colors.primary,
+              borderRadius: 10,
+            }}>
+            <Image
+              source={Icons.menu}
+              style={{
+                width: 20,
+                height: 20,
+                resizeMode: 'contain',
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.8}>
+            <Image
+              source={Icons.notification}
+              style={{
+                width: 30,
+                height: 30,
+                resizeMode: 'contain',
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={{
+            flex: 1,
+            backgroundColor: Colors.white,
+          }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            backgroundColor: Colors.white,
+            paddingBottom: isKeyboardVisible ? 0 : 50,
           }}>
           <View
             style={{
-              paddingHorizontal: 20,
+              backgroundColor: Colors.yellow,
+              width: '100%',
+              paddingBottom: 10,
             }}>
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                paddingHorizontal: 20,
               }}>
-              <TouchableOpacity
-                onPress={NavService.toggleDrawer}
-                activeOpacity={0.8}
+              <Text
                 style={{
-                  padding: 10,
-                  backgroundColor: Colors.primary,
-                  borderRadius: 10,
+                  fontSize: 28,
+                  fontWeight: 'bold',
+                  color: Colors.title,
+                  marginTop: 15,
+                }}>
+                What would you like to learn today?
+              </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: Colors.title,
+                  marginTop: 5,
+                }}>
+                Search Below.
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                  height: 50,
+                  borderBottomColor: Colors.white,
+                  borderBottomWidth: 1,
+                  alignItems: 'center',
                 }}>
                 <Image
-                  source={Icons.menu}
+                  source={Icons.search}
+                  style={{width: 20, height: 20, resizeMode: 'contain'}}
+                />
+                <TextInput
+                  placeholder="Search Courses"
+                  placeholderTextColor={Colors.white}
                   style={{
-                    width: 20,
-                    height: 20,
-                    resizeMode: 'contain',
+                    color: Colors.white,
+                    marginLeft: 10,
+                    height: 50,
+                    width: '100%',
+                  }}
+                  returnKeyType="search"
+                  onSubmitEditing={() => {
+                    console.log('search');
                   }}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8}>
-                <Image
-                  source={Icons.notification}
-                  style={{
-                    width: 30,
-                    height: 30,
-                    resizeMode: 'contain',
-                  }}
-                />
-              </TouchableOpacity>
+              </View>
             </View>
-            <Text
-              style={{
-                fontSize: 28,
-                fontWeight: 'bold',
-                color: Colors.title,
-                marginTop: 15,
-              }}>
-              What would you like to learn today?
-            </Text>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                color: Colors.title,
-                marginTop: 5,
-              }}>
-              Search Below.
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '100%',
-                height: 50,
-                borderBottomColor: Colors.white,
-                borderBottomWidth: 1,
-                alignItems: 'center',
-              }}>
-              <Image
-                source={Icons.search}
-                style={{width: 20, height: 20, resizeMode: 'contain'}}
-              />
-              <TextInput
-                placeholder="Search Courses"
-                placeholderTextColor={Colors.white}
-                style={{
-                  color: Colors.white,
-                  marginLeft: 10,
-                  height: 50,
-                  width: '100%',
-                }}
-                returnKeyType="search"
-                onSubmitEditing={() => {
-                  console.log('search');
-                }}
-              />
-            </View>
+            <FlatList
+              data={category}
+              renderItem={this.renderItem}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                paddingHorizontal: 15,
+              }}
+              style={{marginTop: 15}}
+              keyExtractor={(item, index) => index.toString()}
+            />
           </View>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: Colors.black,
+              marginTop: 10,
+              marginLeft: 20,
+            }}>
+            Ongoing Courses
+          </Text>
           <FlatList
-            data={category}
-            renderItem={this.renderItem}
+            data={ongoingCourses}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={props => <OngoingCourses {...props} />}
             horizontal
             showsHorizontalScrollIndicator={false}
+            style={{marginTop: 15, maxHeight: 100}}
             contentContainerStyle={{
-              paddingHorizontal: 15,
+              paddingHorizontal: 20,
+              paddingRight: 5,
             }}
-            style={{marginTop: 15}}
-            keyExtractor={(item, index) => index.toString()}
           />
-        </View>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: Colors.black,
-            marginTop: 10,
-            marginLeft: 20,
-          }}>
-          Ongoing Courses
-        </Text>
-        <FlatList
-          data={ongoingCourses}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={props => <OngoingCourses {...props} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{marginTop: 15, maxHeight: 100}}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingRight: 5,
-          }}
-        />
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: Colors.black,
-            marginTop: 20,
-            marginLeft: 20,
-          }}>
-          Feature Courses
-        </Text>
-        <FlatList
-          data={featuredCourses}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={props => <Courses {...props} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{marginTop: 15, maxHeight: 285}}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingRight: 5,
-          }}
-        />
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: Colors.black,
-            marginTop: 20,
-            marginLeft: 20,
-          }}>
-          Feature Courses
-        </Text>
-        <FlatList
-          data={featuredCourses}
-          renderItem={props => <Courses {...props} />}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{marginTop: 15, maxHeight: 285}}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingRight: 5,
-          }}
-        />
-      </KeyboardAwareScrollView>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: Colors.black,
+              marginTop: 20,
+              marginLeft: 20,
+            }}>
+            Feature Courses
+          </Text>
+          <FlatList
+            data={featuredCourses}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={props => <Courses {...props} />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{marginTop: 15}}
+            contentContainerStyle={{
+              paddingHorizontal: 20,
+              paddingRight: 5,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: Colors.black,
+              marginTop: 20,
+              marginLeft: 20,
+            }}>
+            Feature Courses
+          </Text>
+          <FlatList
+            data={featuredCourses}
+            renderItem={props => <Courses {...props} />}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{marginTop: 15}}
+            contentContainerStyle={{
+              paddingHorizontal: 20,
+              paddingRight: 5,
+            }}
+          />
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }

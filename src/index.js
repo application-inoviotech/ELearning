@@ -106,7 +106,7 @@ const TabStack = () => {
       initialRouteName={'HomeScreen'}>
       <Tab.Screen name="HomeScreen" component={Home} />
       <Tab.Screen name="MyCoursesStack" component={MyCoursesStack} />
-      <Tab.Screen name="Explore" component={Explore} />
+      <Tab.Screen name="Explore" component={Home} />
       <Tab.Screen name="MyChat" component={Messages} />
       <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
@@ -187,8 +187,8 @@ class Navigation extends Component {
   state = {
     // ready: false,
     ready: true,
-    initialRouteName: 'AppStack',
-    // initialRouteName: 'AuthStack',
+    // initialRouteName: 'AppStack',
+    initialRouteName: 'AuthStack',
   };
   componentDidMount() {
     setTimeout(() => {
@@ -220,6 +220,8 @@ class Navigation extends Component {
     );
   }
 }
+
+const Demo = () => <View style={{flex: 1, backgroundColor: 'red'}}></View>;
 
 function mapStateToProps({user: {userData}}) {
   return {

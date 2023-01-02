@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   Text,
   TextInput,
@@ -400,75 +401,117 @@ const GroupChat = ({item}) => {
 };
 
 const ImageChat = ({item, type}) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
   return (
-    <View
-      style={{
-        alignItems: item.sentByMe ? 'flex-end' : 'flex-start',
-        marginBottom: 15,
-      }}>
-      {!item.sentByMe && type != 'single' ? (
-        <View
+    <>
+      <Modal animationType="fade" visible={modalVisible} transparent={true}>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => setModalVisible(false)}
           style={{
-            flexDirection: item.sentByMe ? 'column' : 'row',
-            alignItems: item.sentByMe ? 'flex-end' : 'flex-start',
+            flex: 1,
+            backgroundColor: Colors.black,
+            paddingVertical: getStatusBarHeight(),
           }}>
           <Image
-            source={item.senderImage}
-            style={{
-              height: 40,
-              width: 40,
-              borderRadius: 40,
-              resizeMode: 'cover',
-              backgroundColor: Colors.grey,
-            }}
+            source={{uri: item.uri}}
+            style={{flex: 1}}
+            resizeMode={'contain'}
           />
-          <View
+          <TouchableOpacity
             style={{
-              marginLeft: item.sentByMe ? 0 : 10,
-            }}>
+              position: 'absolute',
+              top: getStatusBarHeight() + 20,
+              right: 20,
+              zIndex: 1,
+              backgroundColor: Colors.white,
+              height: 30,
+              width: 30,
+              borderRadius: 50,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => setModalVisible(false)}>
             <Text
               style={{
-                color: Colors.darkText,
-                fontSize: 12,
-                marginVertical: 5,
+                color: Colors.black,
               }}>
-              {item.senderName}
+              X
             </Text>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
+        activeOpacity={0.8}
+        style={{
+          alignItems: item.sentByMe ? 'flex-end' : 'flex-start',
+          marginBottom: 15,
+        }}>
+        {!item.sentByMe && type != 'single' ? (
+          <View
+            style={{
+              flexDirection: item.sentByMe ? 'column' : 'row',
+              alignItems: item.sentByMe ? 'flex-end' : 'flex-start',
+            }}>
             <Image
-              source={{uri: item.uri}}
+              source={item.senderImage}
               style={{
-                height: 200,
-                width: 200,
+                height: 40,
+                width: 40,
+                borderRadius: 40,
                 resizeMode: 'cover',
-                borderRadius: 10,
                 backgroundColor: Colors.grey,
               }}
             />
+            <View
+              style={{
+                marginLeft: item.sentByMe ? 0 : 10,
+              }}>
+              <Text
+                style={{
+                  color: Colors.darkText,
+                  fontSize: 12,
+                  marginVertical: 5,
+                }}>
+                {item.senderName}
+              </Text>
+              <Image
+                source={{uri: item.uri}}
+                style={{
+                  height: 200,
+                  width: 200,
+                  resizeMode: 'cover',
+                  borderRadius: 10,
+                  backgroundColor: Colors.grey,
+                }}
+              />
+            </View>
           </View>
-        </View>
-      ) : (
-        <Image
-          source={{uri: item.uri}}
-          style={{
-            height: 200,
-            width: 200,
-            resizeMode: 'cover',
-            borderRadius: 10,
-            backgroundColor: Colors.grey,
-          }}
-        />
-      )}
+        ) : (
+          <Image
+            source={{uri: item.uri}}
+            style={{
+              height: 200,
+              width: 200,
+              resizeMode: 'cover',
+              borderRadius: 10,
+              backgroundColor: Colors.grey,
+            }}
+          />
+        )}
 
-      <Text
-        style={{
-          color: Colors.darkText,
-          fontSize: 12,
-          marginTop: 10,
-          marginRight: item.sentByMe ? 10 : 0,
-          marginLeft: item.sentByMe ? 0 : type != 'single' ? 60 : 10,
-        }}>
-        {item.time}
-      </Text>
-    </View>
+        <Text
+          style={{
+            color: Colors.darkText,
+            fontSize: 12,
+            marginTop: 10,
+            marginRight: item.sentByMe ? 10 : 0,
+            marginLeft: item.sentByMe ? 0 : type != 'single' ? 60 : 10,
+          }}>
+          {item.time}
+        </Text>
+      </TouchableOpacity>
+    </>
   );
 };
