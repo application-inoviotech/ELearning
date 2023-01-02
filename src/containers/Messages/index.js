@@ -69,7 +69,7 @@ const messages = [
   },
 ];
 
-export class MyCourses extends Component {
+export class Messages extends Component {
   state = {search: ''};
   render() {
     const {search} = this.state;
@@ -130,7 +130,7 @@ export class MyCourses extends Component {
   }
 }
 
-export default MyCourses;
+export default Messages;
 
 const Course = ({item}) => {
   return (
@@ -147,7 +147,13 @@ const Course = ({item}) => {
       {item?.type == 'single' ? (
         <Image
           source={item.image}
-          style={{width: 60, height: 60, borderRadius: 60, resizeMode: 'cover'}}
+          style={{
+            width: 60,
+            height: 60,
+            borderRadius: 60,
+            resizeMode: 'cover',
+            backgroundColor: Colors.grey,
+          }}
         />
       ) : (
         <View
@@ -167,6 +173,7 @@ const Course = ({item}) => {
                 height: 30,
                 borderRadius: 60,
                 resizeMode: 'cover',
+                backgroundColor: Colors.grey,
               }}
             />
           ))}

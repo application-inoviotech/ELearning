@@ -14,11 +14,11 @@ import Logo from '../../components/Logo';
 import CustomTextInput from '../../components/CustomTextInput';
 import CustomButton from '../../components/CustomButton';
 
-if (Platform.OS === 'android') {
-  if (UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
-}
+// if (Platform.OS === 'android') {
+//   if (UIManager.setLayoutAnimationEnabledExperimental) {
+//     UIManager.setLayoutAnimationEnabledExperimental(true);
+//   }
+// }
 
 export class LoginSignup extends Component {
   state = {

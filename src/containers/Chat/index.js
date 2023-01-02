@@ -119,6 +119,7 @@ export class Chat extends Component {
                 borderRadius: 45,
                 resizeMode: 'cover',
                 marginHorizontal: 10,
+                backgroundColor: Colors.grey,
               }}
             />
           ) : (
@@ -140,6 +141,7 @@ export class Chat extends Component {
                     height: 25,
                     borderRadius: 60,
                     resizeMode: 'cover',
+                    backgroundColor: Colors.grey,
                   }}
                 />
               ))}
@@ -345,6 +347,7 @@ const GroupChat = ({item}) => {
               width: 40,
               borderRadius: 40,
               resizeMode: 'cover',
+              backgroundColor: Colors.grey,
             }}
           />
         )}
@@ -397,7 +400,6 @@ const GroupChat = ({item}) => {
 };
 
 const ImageChat = ({item, type}) => {
-  console.log(item);
   return (
     <View
       style={{
@@ -417,6 +419,7 @@ const ImageChat = ({item, type}) => {
               width: 40,
               borderRadius: 40,
               resizeMode: 'cover',
+              backgroundColor: Colors.grey,
             }}
           />
           <View
@@ -438,6 +441,7 @@ const ImageChat = ({item, type}) => {
                 width: 200,
                 resizeMode: 'cover',
                 borderRadius: 10,
+                backgroundColor: Colors.grey,
               }}
             />
           </View>
@@ -450,6 +454,7 @@ const ImageChat = ({item, type}) => {
             width: 200,
             resizeMode: 'cover',
             borderRadius: 10,
+            backgroundColor: Colors.grey,
           }}
         />
       )}

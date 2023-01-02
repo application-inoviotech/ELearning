@@ -133,8 +133,8 @@ class Navigation extends Component {
   state = {
     // ready: false,
     ready: true,
-    initialRouteName: 'AppStack',
-    // initialRouteName: 'AuthStack',
+    // initialRouteName: 'AppStack',
+    initialRouteName: 'AuthStack',
   };
   componentDidMount() {
     setTimeout(() => {
