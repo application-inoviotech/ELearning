@@ -41,8 +41,8 @@ function reset(index, routes) {
   );
 }
 
-function openDrawer() {
-  _navigator.dispatch(DrawerActions.openDrawer());
+function toggleDrawer() {
+  _navigator.dispatch(DrawerActions.toggleDrawer());
 }
 
 export default {
@@ -51,5 +51,5 @@ export default {
   replace,
   reset,
   setTopLevelNavigator,
-  openDrawer,
+  toggleDrawer,
 };

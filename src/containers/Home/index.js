@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {Component} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Colors} from '../../config';
+import {Colors, NavService} from '../../config';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Images from '../../assets/Images';
 import Courses from '../../components/Courses';
@@ -158,93 +158,101 @@ export class Home extends Component {
             backgroundColor: Colors.yellow,
             width: '100%',
             paddingTop: getStatusBarHeight(),
-            paddingHorizontal: 20,
             paddingBottom: 10,
           }}>
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              paddingHorizontal: 20,
             }}>
-            <TouchableOpacity
-              activeOpacity={0.8}
+            <View
               style={{
-                padding: 10,
-                backgroundColor: Colors.primary,
-                borderRadius: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={NavService.toggleDrawer}
+                activeOpacity={0.8}
+                style={{
+                  padding: 10,
+                  backgroundColor: Colors.primary,
+                  borderRadius: 10,
+                }}>
+                <Image
+                  source={Icons.menu}
+                  style={{
+                    width: 20,
+                    height: 20,
+                    resizeMode: 'contain',
+                  }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.8}>
+                <Image
+                  source={Icons.notification}
+                  style={{
+                    width: 30,
+                    height: 30,
+                    resizeMode: 'contain',
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+            <Text
+              style={{
+                fontSize: 28,
+                fontWeight: 'bold',
+                color: Colors.title,
+                marginTop: 15,
+              }}>
+              What would you like to learn today?
+            </Text>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                color: Colors.title,
+                marginTop: 5,
+              }}>
+              Search Below.
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '100%',
+                height: 50,
+                borderBottomColor: Colors.white,
+                borderBottomWidth: 1,
+                alignItems: 'center',
               }}>
               <Image
-                source={Icons.menu}
+                source={Icons.search}
+                style={{width: 20, height: 20, resizeMode: 'contain'}}
+              />
+              <TextInput
+                placeholder="Search Courses"
+                placeholderTextColor={Colors.white}
                 style={{
-                  width: 20,
-                  height: 20,
-                  resizeMode: 'contain',
+                  color: Colors.white,
+                  marginLeft: 10,
+                  height: 50,
+                  width: '100%',
+                }}
+                returnKeyType="search"
+                onSubmitEditing={() => {
+                  console.log('search');
                 }}
               />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.8}>
-              <Image
-                source={Icons.notification}
-                style={{
-                  width: 30,
-                  height: 30,
-                  resizeMode: 'contain',
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-          <Text
-            style={{
-              fontSize: 28,
-              fontWeight: 'bold',
-              color: Colors.title,
-              marginTop: 15,
-            }}>
-            What would you like to learn today?
-          </Text>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              color: Colors.title,
-              marginTop: 5,
-            }}>
-            Search Below.
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              height: 50,
-              borderBottomColor: Colors.white,
-              borderBottomWidth: 1,
-              alignItems: 'center',
-            }}>
-            <Image
-              source={Icons.search}
-              style={{width: 20, height: 20, resizeMode: 'contain'}}
-            />
-            <TextInput
-              placeholder="Search Courses"
-              placeholderTextColor={Colors.white}
-              style={{
-                color: Colors.white,
-                marginLeft: 10,
-                height: 50,
-                width: '100%',
-              }}
-              returnKeyType="search"
-              onSubmitEditing={() => {
-                console.log('search');
-              }}
-            />
+            </View>
           </View>
           <FlatList
             data={category}
             renderItem={this.renderItem}
             horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingHorizontal: 15,
+            }}
             style={{marginTop: 15}}
             keyExtractor={(item, index) => index.toString()}
           />

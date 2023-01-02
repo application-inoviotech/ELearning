@@ -1,17 +1,31 @@
 import React, {Component} from 'react';
 import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
-import {connect} from 'react-redux';
-import Icons from '../assets/Icons';
-import {Colors, NavService} from '../config';
-import {logout} from '../redux/actions';
-import ProfileImage from './ProfileImage';
+import Icons from '../../assets/Icons';
+import {Colors, NavService} from '../index';
+import ProfileImage from '../../components/ProfileImage';
+import Images from '../../assets/Images';
 
 const menuItems = [
   {
-    icon: Icons.homeDrawer,
+    icon: Icons.home,
     title: 'Home',
-    nav: 'Home',
+    nav: 'HomeScreen',
+  },
+  {
+    icon: Icons.video,
+    title: 'Videos',
+    nav: 'HomeScreen',
+  },
+  {
+    icon: Icons.messages,
+    title: 'Messages',
+    nav: 'MyChat',
+  },
+  {
+    icon: Icons.myCourses,
+    title: 'Courses',
+    nav: 'MyCoursesStack',
   },
   {
     icon: Icons.settings,
@@ -19,61 +33,43 @@ const menuItems = [
     nav: 'Settings',
   },
   {
-    icon: Icons.termsConditions,
-    title: 'Terms & Conditions',
-    nav: 'TermsConditions',
-  },
-  {
-    icon: Icons.privacyPolicy,
-    title: 'Privacy Policy',
-    nav: 'PrivacyPolicy',
-  },
-  {
     icon: Icons.logout,
     title: 'Logout',
-    nav: 'RoleSelection',
   },
 ];
 
-class Drawer extends Component {
-  _renderItem({title, icon, nav}) {
+function Drawer() {
+  const _renderItem = ({item: {title, icon, nav}}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
           if (title === 'Logout') {
-            NavService.reset(0, [{name: nav}]);
+            NavService.reset(0, [{name: 'AuthStack'}]);
           } else {
-            this.props.navigation.navigate(nav);
+            NavService.navigate(nav);
           }
         }}
         style={{
           width: '100%',
           flexDirection: 'row',
           alignItems: 'center',
-          marginBottom: 10,
-          borderBottomWidth: 0.5,
+          marginBottom: 50,
           borderColor: title === 'Logout' ? 'transparent' : Colors.grey + '70',
         }}>
-        <View
+        <Image
+          source={icon}
           style={{
-            padding: 10,
-            borderRadius: 7,
-          }}>
-          <Image
-            source={icon}
-            style={{
-              width: 20,
-              height: 20,
-              resizeMode: 'contain',
-              tintColor: Colors.primary,
-            }}
-          />
-        </View>
+            width: 20,
+            height: 20,
+            resizeMode: 'contain',
+            tintColor: '#ACC1F8',
+          }}
+        />
         <Text
           style={{
             marginLeft: 10,
-            color: Colors.secondary,
+            color: '#ACC1F8',
             fontSize: 16,
             fontWeight: '500',
           }}>
@@ -81,79 +77,82 @@ class Drawer extends Component {
         </Text>
       </TouchableOpacity>
     );
-  }
-  render() {
-    const {user} = this.props;
-    console.log('user', user);
-    return (
+  };
+
+  return (
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: Colors.primary,
+        paddingTop: getStatusBarHeight(),
+        borderTopRightRadius: 30,
+        borderBottomRightRadius: 30,
+      }}>
       <View
         style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: Colors.white,
+          marginTop: 20,
+          flexDirection: 'row',
+          width: '80%',
           alignItems: 'center',
-          paddingTop: getStatusBarHeight(),
-          borderTopRightRadius: 30,
-          borderBottomRightRadius: 30,
+          borderColor: Colors.grey + '50',
+          paddingBottom: 20,
+          marginHorizontal: 20,
         }}>
         <View
           style={{
-            marginTop: 20,
-            // flexDirection: 'row',
-            width: '80%',
-            alignItems: 'center',
-            borderBottomWidth: 0.5,
-            borderColor: Colors.grey + '50',
-            paddingBottom: 20,
+            borderRadius: 40,
+            width: 40,
+            height: 40,
+            backgroundColor: Colors.white,
+            overflow: 'hidden',
           }}>
-          <ProfileImage size={110} imageUri={user?.image} name={user?.name} />
-          <Text
-            numberOfLines={1}
-            style={{
-              color: Colors.secondary,
-              fontSize: 14,
-              marginTop: 15,
-            }}>
-            {user?.name}
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={{
-              color: Colors.secondary,
-              fontSize: 14,
-              marginTop: 5,
-            }}>
-            {user?.email}
-          </Text>
-        </View>
-        <View style={{flex: 1, marginTop: 30, width: '80%'}}>
-          <FlatList
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            data={menuItems}
-            style={{
-              height: '100%',
-            }}
-            renderItem={({item}) => this._renderItem(item)}
+          <Image
+            source={Images.avatar}
+            style={{width: 40, height: 40, resizeMode: 'contain'}}
           />
         </View>
+        <View
+          style={{
+            marginLeft: 10,
+          }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '500',
+              color: Colors.white,
+            }}>
+            Thomas Andrew
+          </Text>
+          <Text
+            style={{
+              fontSize: 10,
+              fontWeight: '300',
+              color: Colors.white,
+            }}>
+            STUDENT
+          </Text>
+        </View>
       </View>
-    );
-  }
+      <View
+        style={{
+          flex: 1,
+          marginTop: 30,
+          width: '100%',
+        }}>
+        <FlatList
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          data={menuItems}
+          style={{
+            height: '100%',
+            marginHorizontal: 40,
+          }}
+          renderItem={_renderItem}
+        />
+      </View>
+    </View>
+  );
 }
 
-function mapState({reducer: {user}}) {
-  return {
-    user,
-  };
-}
-
-function mapDispatch(dispatch) {
-  return {
-    logout: (token, userID) => {
-      dispatch(logout(token, userID));
-    },
-  };
-}
-
-export default connect(mapState, mapDispatch)(Drawer);
+export default Drawer;

@@ -1,13 +1,19 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
+import {StyleSheet} from 'react-native';
+import Animated from 'react-native-reanimated';
 
 // Navigation here
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  useDrawerProgress,
+} from '@react-navigation/drawer';
 
 import {Colors, NavService} from './config';
 import TabbarComp from './config/Helpers/TabbarComp';
+import DrawerCustom from './config/Helpers/Drawer';
 import {connect} from 'react-redux';
 
 //Screens
@@ -108,24 +114,73 @@ const TabStack = () => {
   );
 };
 
+const Screens = () => {
+  //Made By Maaz Abdul Jabbar
+  const progress = useDrawerProgress();
+
+  const scale = Animated.interpolateNode(progress, {
+    inputRange: [0, 1],
+    outputRange: [1, 0.8],
+  });
+
+  const borderRadius = Animated.interpolateNode(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, 40],
+  });
+
+  const translateX = Animated.interpolateNode(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, -50],
+  });
+
+  return (
+    <Animated.View
+      style={{
+        flex: 1,
+        overflow: 'hidden',
+        borderRadius,
+        transform: [{scale, translateX}],
+      }}>
+      <Stack.Navigator
+        screenOptions={{
+          contentStyle: {backgroundColor: Colors.white},
+          animation: 'fade',
+          headerShown: false,
+        }}
+        initialRouteName="TabStack">
+        <Stack.Screen name="TabStack" component={TabStack} />
+        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="CourseDetails" component={CourseDetails} />
+        <Stack.Screen name="Quiz" component={Quiz} />
+        <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen name="AddCard" component={AddCard} />
+        <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} />
+        <Stack.Screen name="Result" component={Result} />
+      </Stack.Navigator>
+    </Animated.View>
+  );
+};
+
 const AppStack = () => {
   return (
-    <Stack.Navigator
+    <Drawer.Navigator
+      useLegacyImplementation
       screenOptions={{
-        contentStyle: {backgroundColor: Colors.white},
-        animation: 'fade',
+        drawerType: 'slide',
+        drawerStyle: {
+          width: '60%',
+          backgroundColor: Colors.primary,
+        },
         headerShown: false,
+        overlayColor: 'transparent',
+        sceneContainerStyle: {backgroundColor: Colors.primary},
       }}
-      initialRouteName="TabStack">
-      <Stack.Screen name="TabStack" component={TabStack} />
-      <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="CourseDetails" component={CourseDetails} />
-      <Stack.Screen name="Quiz" component={Quiz} />
-      <Stack.Screen name="Payment" component={Payment} />
-      <Stack.Screen name="AddCard" component={AddCard} />
-      <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} />
-      <Stack.Screen name="Result" component={Result} />
-    </Stack.Navigator>
+      contentContainerStyle={{flex: 1}}
+      drawerContent={props => <DrawerCustom {...props} />}>
+      <Drawer.Screen name="Screens">
+        {props => <Screens {...props} />}
+      </Drawer.Screen>
+    </Drawer.Navigator>
   );
 };
 
@@ -133,8 +188,8 @@ class Navigation extends Component {
   state = {
     // ready: false,
     ready: true,
-    // initialRouteName: 'AppStack',
-    initialRouteName: 'AuthStack',
+    initialRouteName: 'AppStack',
+    // initialRouteName: 'AuthStack',
   };
   componentDidMount() {
     setTimeout(() => {
@@ -174,3 +229,7 @@ function mapStateToProps({user: {userData}}) {
 }
 
 export default connect(mapStateToProps)(Navigation);
+
+const styles = StyleSheet.create({
+  stack: {},
+});

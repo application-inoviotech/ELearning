@@ -27,4 +27,7 @@ export default Icons = {
   mail: require('./mail.png'),
   lock: require('./lock.png'),
   pin: require('./pin.png'),
+  messages: require('./messages.png'),
+  settings: require('./settings.png'),
+  logout: require('./logout.png'),
 };

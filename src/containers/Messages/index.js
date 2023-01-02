@@ -116,7 +116,7 @@ export class Messages extends Component {
           }}>
           <FlatList
             data={messages}
-            renderItem={props => <Course {...props} />}
+            renderItem={props => <Message {...props} />}
             style={{
               flex: 1,
             }}
@@ -132,7 +132,7 @@ export class Messages extends Component {
 
 export default Messages;
 
-const Course = ({item}) => {
+const Message = ({item}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -203,7 +203,7 @@ const Course = ({item}) => {
           {item?.unreadMessages != '00' && (
             <View
               style={{
-                backgroundColor: Colors.icon,
+                backgroundColor: Colors.secondary,
                 padding: 4,
                 borderRadius: 100,
                 height: 21,
