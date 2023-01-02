@@ -1,5 +1,4 @@
-import React, {Component, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import React, {Component} from 'react';
 import Animated from 'react-native-reanimated';
 
 // Navigation here
@@ -229,7 +228,3 @@ function mapStateToProps({user: {userData}}) {
 }
 
 export default connect(mapStateToProps)(Navigation);
-
-const styles = StyleSheet.create({
-  stack: {},
-});
